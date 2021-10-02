@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+    name: demo-api-blue
+    namespace: dev-biitacora
+spec:
+    replicas: 1
+    strategy:
+        rollingUpdate:
+            maxSurge: 1
+            maxUnavailable: 1
+    minReadySeconds: 5 
+    selector:
+        matchLabels:    
+            app: demo 
+            service: api
+            color: blue
+    template:
+        metadata:
+            labels:
+                app: demo
+                service: api
+                color: blue
+        spec:
+            containers:
+            - image: acrbiitacorascus.azurecr.io/dev-demoapi:latest
+              name: demo-api
+              imagePullPolicy: Always
+              ports:
+              - containerPort: 80
+                protocol: TCP
+              - containerPort: 443
+                protocol: TCP                 

@@ -1,0 +1,677 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: nginx-ingress
+  namespace: biitacora
+  annotations:
+    kubernetes.io/ingress.class: nginx            
+    nginx.ingress.kubernetes.io/proxy-body-size: 1000m    
+    cert-manager.io/cluster-issuer: pro-letsencrypt    
+spec: 
+  tls:
+  - hosts:
+    - normasmexico.com
+    secretName: tls-secret
+  rules:
+  - host: normasmexico.com
+    http:  
+      paths:
+      - path: /
+        backend:
+          serviceName: web-client
+          servicePort: 80    
+      - path: /demo
+        backend:
+          serviceName: demo-api
+          servicePort: 80      
+      - path: /demo/swagger
+        backend:
+          serviceName: demo-api
+          servicePort: 80
+      - path: /api/demo
+        backend:
+          serviceName: demo-api
+          servicePort: 80      
+      
+      - path: /auth
+        backend:
+          serviceName: auth-api
+          servicePort: 80
+      - path: /auth/token
+        backend:
+          serviceName: auth-api
+          servicePort: 80    
+      - path: /auth/swagger
+        backend:
+          serviceName: auth-api
+          servicePort: 80          
+      - path: /api/account
+        backend:
+          serviceName: auth-api
+          servicePort: 80    
+      - path: /api/user
+        backend:
+          serviceName: auth-api
+          servicePort: 80
+      - path: /api/role
+        backend:
+          serviceName: auth-api
+          servicePort: 80
+      
+      - path: /business
+        backend:
+          serviceName: business-api
+          servicePort: 80      
+      - path: /business/swagger
+        backend:
+          serviceName: business-api
+          servicePort: 80
+      - path: /api/workcenter
+        backend:
+          serviceName: business-api
+          servicePort: 80
+      - path: /api/workcenterquestion
+        backend:
+          serviceName: business-api
+          servicePort: 80 
+      - path: /api/workcentersquestions
+        backend:
+          serviceName: business-api
+          servicePort: 80         
+      - path: /api/zone
+        backend:
+          serviceName: business-api
+          servicePort: 80
+      - path: /api/zonequestion
+        backend:
+          serviceName: business-api
+          servicePort: 80  
+      - path: /api/zonesquestions
+        backend:
+          serviceName: business-api
+          servicePort: 80              
+      - path: /api/zonesequipments
+        backend:
+          serviceName: business-api
+          servicePort: 80     
+      - path: /api/equipment
+        backend:
+          serviceName: business-api
+          servicePort: 80
+      - path: /api/equipmentquestion
+        backend:
+          serviceName: business-api
+          servicePort: 80  
+      - path: /api/equipmentsquestions
+        backend:
+          serviceName: business-api
+          servicePort: 80          
+      - path: /api/workcenterszones
+        backend:
+          serviceName: business-api
+          servicePort: 80
+      - path: /api/norm
+        backend:
+          serviceName: business-api
+          servicePort: 80   
+      - path: /api/workcentersnorms
+        backend:
+          serviceName: business-api
+          servicePort: 80  
+      - path: /api/governmentinstitution
+        backend:
+          serviceName: business-api
+          servicePort: 80
+      - path: /api/governmentinstitutionsnorms
+        backend:
+          serviceName: business-api
+          servicePort: 80    
+      - path: /api/normativeconfig
+        backend:
+          serviceName: business-api
+          servicePort: 80
+      - path: /api/bridge
+        backend:
+          serviceName: business-api
+          servicePort: 80  
+          
+      - path: /generalparams
+        backend:
+          serviceName: generalparams-api
+          servicePort: 80      
+      - path: /generalparams/swagger
+        backend:
+          serviceName: generalparams-api
+          servicePort: 80
+      - path: /api/categorytype
+        backend:
+          serviceName: generalparams-api
+          servicePort: 80  
+      - path: /api/category
+        backend:
+          serviceName: generalparams-api
+          servicePort: 80 
+      - path: /api/attributetype
+        backend:
+          serviceName: generalparams-api
+          servicePort: 80
+      - path: /api/attribute
+        backend:
+          serviceName: generalparams-api
+          servicePort: 80 
+      - path: /api/fieldtype
+        backend:
+          serviceName: generalparams-api
+          servicePort: 80   
+      - path: /api/valuetype
+        backend:
+          serviceName: generalparams-api
+          servicePort: 80   
+      - path: /api/attributeforeignkeys
+        backend:
+          serviceName: generalparams-api
+          servicePort: 80             
+      
+      - path: /operation
+        backend:
+          serviceName: operation-api
+          servicePort: 80      
+      - path: /operation/swagger
+        backend:
+          serviceName: operation-api
+          servicePort: 80
+      - path: /api/procedure
+        backend:
+          serviceName: operation-api
+          servicePort: 80
+      - path: /api/document
+        backend:
+          serviceName: operation-api
+          servicePort: 80 
+      - path: /api/documentfile
+        backend:
+          serviceName: operation-api
+          servicePort: 80
+      - path: /api/binnacle
+        backend:
+          serviceName: operation-api
+          servicePort: 80
+      - path: /api/binnaclequestion
+        backend:
+          serviceName: operation-api
+          servicePort: 80
+      - path: /api/binnaclesquestions
+        backend:
+          serviceName: operation-api
+          servicePort: 80
+      - path: /api/program
+        backend:
+          serviceName: operation-api
+          servicePort: 80 
+      - path: /api/programquestion
+        backend:
+          serviceName: operation-api
+          servicePort: 80 
+      - path: /api/programsquestions
+        backend:
+          serviceName: operation-api
+          servicePort: 80           
+      - path: /api/programsbinnaclequestions
+        backend:
+          serviceName: operation-api
+          servicePort: 80  
+      - path: /api/programcreator
+        backend:
+          serviceName: operation-api
+          servicePort: 80     
+      
+      - path: /materializedviews
+        backend:
+          serviceName: materializedviews-api
+          servicePort: 80      
+      - path: /materializedviews/swagger
+        backend:
+          serviceName: materializedviews-api
+          servicePort: 80  
+      - path: /api/workcenterquestionsattributes
+        backend:
+          serviceName: materializedviews-api
+          servicePort: 80   
+      - path: /api/binnaclequestionsattributes
+        backend:
+          serviceName: materializedviews-api
+          servicePort: 80 
+      - path: /api/programquestionsattributes
+        backend:
+          serviceName: materializedviews-api
+          servicePort: 80             
+      - path: /api/normativeconfigsprocedures
+        backend:
+          serviceName: materializedviews-api
+          servicePort: 80            
+      - path: /api/normativeconfigsdocuments
+        backend:
+          serviceName: materializedviews-api
+          servicePort: 80            
+      - path: /api/normativeconfigsbinnacles
+        backend:
+          serviceName: materializedviews-api
+          servicePort: 80            
+      - path: /api/normativeconfigsprograms
+        backend:
+          serviceName: materializedviews-api
+          servicePort: 80   
+      - path: /api/binnaclequestionszones
+        backend:
+          serviceName: materializedviews-api
+          servicePort: 80 
+      - path: /api/binnaclequestionsequipments
+        backend:
+          serviceName: materializedviews-api
+          servicePort: 80  
+      - path: /api/zonequestionsattributes
+        backend:
+          serviceName: materializedviews-api
+          servicePort: 80
+      - path: /api/equipmentquestionsattributes
+        backend:
+          serviceName: materializedviews-api
+          servicePort: 80        
+      - path: /api/workcentercreator
+        backend:
+          serviceName: materializedviews-api
+          servicePort: 80                   
+      - path: /api/zonecreator
+        backend:
+          serviceName: materializedviews-api
+          servicePort: 80
+      - path: /api/equipmentcreator
+        backend:
+          serviceName: materializedviews-api
+          servicePort: 80 
+      - path: /api/binnaclecreator
+        backend:
+          serviceName: materializedviews-api
+          servicePort: 80        
+      
+      - path: /client
+        backend:
+          serviceName: client-api
+          servicePort: 80 
+      - path: /client/swagger
+        backend:
+          serviceName: client-api
+          servicePort: 80  
+      - path: /api/usersworkcenters
+        backend:
+          serviceName: client-api
+          servicePort: 80  
+      - path: /api/usersbinnacles
+        backend:
+          serviceName: client-api
+          servicePort: 80    
+      - path: /api/usersbinnacles/binnaclequestionsinfo
+        backend:
+          serviceName: client-api
+          servicePort: 80        
+      - path: /api/usersprocedures
+        backend:
+          serviceName: client-api
+          servicePort: 80
+      - path: /api/usersprograms
+        backend:
+          serviceName: client-api
+          servicePort: 80          
+      - path: /api/usersdocuments
+        backend:
+          serviceName: client-api
+          servicePort: 80 
+      - path: /api/alert
+        backend:
+          serviceName: client-api
+          servicePort: 80     
+      - path: /api/relationsinusersworkcenters/GetZonesInUsersWorkCenters
+        backend:
+          serviceName: client-api
+          servicePort: 80
+      - path: /api/relationsinusersworkcenters/GetEquipmentsInUsersWorkCenters
+        backend:
+          serviceName: client-api
+          servicePort: 80              
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: nginx-ingress-static
+  namespace: biitacora
+  annotations:
+    kubernetes.io/ingress.class: nginx     
+    nginx.ingress.kubernetes.io/proxy-body-size: 1000m   
+    cert-manager.io/cluster-issuer: pro-letsencrypt    
+spec:
+  tls:
+  - hosts:
+    - normasmexico.com
+    secretName: tls-secret 
+  rules:
+  - host: normasmexico.com
+    http:
+      paths:          
+      - path: /static/demo
+        backend:
+          serviceName: demo-api
+          servicePort: 80      
+      - path: /static/demo/swagger
+        backend:
+          serviceName: demo-api
+          servicePort: 80
+      - path: /static/api/demo
+        backend:
+          serviceName: demo-api
+          servicePort: 80      
+          
+      - path: /static/auth
+        backend:
+          serviceName: auth-api
+          servicePort: 80
+      - path: /auth/token
+        backend:
+          serviceName: auth-api
+          servicePort: 80 
+      - path: /static/auth/swagger
+        backend:
+          serviceName: auth-api
+          servicePort: 80      
+      - path: /static/api/account
+        backend:
+          serviceName: auth-api
+          servicePort: 80               
+      - path: /static/api/user
+        backend:
+          serviceName: auth-api
+          servicePort: 80   
+      - path: /static/api/role
+        backend:
+          serviceName: auth-api
+          servicePort: 80  
+          
+      - path: /static/business
+        backend:
+          serviceName: business-api
+          servicePort: 80      
+      - path: /static/business/swagger
+        backend:
+          serviceName: business-api
+          servicePort: 80
+      - path: /static/api/workcenter
+        backend:
+          serviceName: business-api
+          servicePort: 80            
+      - path: /static/api/workcenterquestion
+        backend:
+          serviceName: business-api
+          servicePort: 80 
+      - path: /static/api/workcentersquestions
+        backend:
+          serviceName: business-api
+          servicePort: 80
+      - path: /static/api/zone
+        backend:
+          serviceName: business-api
+          servicePort: 80      
+      - path: /static/api/zonequestion
+        backend:
+          serviceName: business-api
+          servicePort: 80 
+      - path: /static/api/zonesquestions
+        backend:
+          serviceName: business-api
+          servicePort: 80               
+      - path: /static/api/zonesequipments
+        backend:
+          serviceName: business-api
+          servicePort: 80    
+      - path: /static/api/equipment
+        backend:
+          serviceName: business-api
+          servicePort: 80
+      - path: /static/api/equipmentquestion
+        backend:
+          serviceName: business-api
+          servicePort: 80  
+      - path: /static/api/equipmentsquestions
+        backend:
+          serviceName: business-api
+          servicePort: 80              
+      - path: /static/api/workcenterszones
+        backend:
+          serviceName: business-api
+          servicePort: 80
+      - path: /static/api/norm
+        backend:
+          serviceName: business-api
+          servicePort: 80   
+      - path: /static/api/workcentersnorms
+        backend:
+          serviceName: business-api
+          servicePort: 80  
+      - path: /static/api/governmentinstitution
+        backend:
+          serviceName: business-api
+          servicePort: 80
+      - path: /static/api/governmentinstitutionsnorms
+        backend:
+          serviceName: business-api
+          servicePort: 80
+      - path: /static/api/normativeconfig
+        backend:
+          serviceName: business-api
+          servicePort: 80  
+      - path: /static/api/bridge
+        backend:
+          serviceName: business-api
+          servicePort: 80    
+
+      - path: /static/generalparams
+        backend:
+          serviceName: generalparams-api
+          servicePort: 80      
+      - path: /static/generalparams/swagger
+        backend:
+          serviceName: generalparams-api
+          servicePort: 80
+      - path: /static/api/categorytype
+        backend:
+          serviceName: generalparams-api
+          servicePort: 80  
+      - path: /static/api/category
+        backend:
+          serviceName: generalparams-api
+          servicePort: 80 
+      - path: /static/api/attributetype
+        backend:
+          serviceName: generalparams-api
+          servicePort: 80
+      - path: /static/api/attribute
+        backend:
+          serviceName: generalparams-api
+          servicePort: 80 
+      - path: /static/api/fieldtype
+        backend:
+          serviceName: generalparams-api
+          servicePort: 80
+      - path: /static/api/valuetype
+        backend:
+          serviceName: generalparams-api
+          servicePort: 80   
+      - path: /static/api/attributeforeignkeys
+        backend:
+          serviceName: generalparams-api
+          servicePort: 80             
+
+      - path: /static/materializedviews
+        backend:
+          serviceName: materializedviews-api
+          servicePort: 80      
+      - path: /static/materializedviews/swagger
+        backend:
+          serviceName: materializedviews-api
+          servicePort: 80
+      - path: /static/api/workcenterquestionsattributes
+        backend:
+          serviceName: materializedviews-api
+          servicePort: 80   
+      - path: /static/api/binnaclequestionsattributes
+        backend:
+          serviceName: materializedviews-api
+          servicePort: 80  
+      - path: /static/api/programquestionsattributes
+        backend:
+          serviceName: materializedviews-api
+          servicePort: 80      
+      - path: /static/api/normativeconfigsprocedures
+        backend:
+          serviceName: materializedviews-api
+          servicePort: 80            
+      - path: /static/api/normativeconfigsdocuments
+        backend:
+          serviceName: materializedviews-api
+          servicePort: 80            
+      - path: /static/api/normativeconfigsbinnacles
+        backend:
+          serviceName: materializedviews-api
+          servicePort: 80            
+      - path: /static/api/normativeconfigsprograms
+        backend:
+          serviceName: materializedviews-api
+          servicePort: 80 
+      - path: /static/api/binnaclequestionszones
+        backend:
+          serviceName: materializedviews-api
+          servicePort: 80 
+      - path: /static/api/binnaclequestionsequipments
+        backend:
+          serviceName: materializedviews-api
+          servicePort: 80 
+      - path: /static/api/zonequestionsattributes
+        backend:
+          serviceName: materializedviews-api
+          servicePort: 80
+      - path: /static/api/equipmentquestionsattributes
+        backend:
+          serviceName: materializedviews-api
+          servicePort: 80   
+      - path: /static/api/workcentercreator
+        backend:
+          serviceName: materializedviews-api
+          servicePort: 80                   
+      - path: /static/api/zonecreator
+        backend:
+          serviceName: materializedviews-api
+          servicePort: 80
+      - path: /static/api/equipmentcreator
+        backend:
+          serviceName: materializedviews-api
+          servicePort: 80 
+      - path: /static/api/binnaclecreator
+        backend:
+          serviceName: materializedviews-api
+          servicePort: 80     
+          
+      - path: /static/operation
+        backend:
+          serviceName: operation-api
+          servicePort: 80      
+      - path: /static/operation/swagger
+        backend:
+          serviceName: operation-api
+          servicePort: 80
+      - path: /static/api/procedure
+        backend:
+          serviceName: operation-api
+          servicePort: 80
+      - path: /static/api/document
+        backend:
+          serviceName: operation-api
+          servicePort: 80 
+      - path: /static/api/documentfile
+        backend:
+          serviceName: operation-api
+          servicePort: 80
+      - path: /static/api/binnacle
+        backend:
+          serviceName: operation-api
+          servicePort: 80
+      - path: /static/api/binnaclequestion
+        backend:
+          serviceName: operation-api
+          servicePort: 80
+      - path: /static/api/binnaclesquestions
+        backend:
+          serviceName: operation-api
+          servicePort: 80
+      - path: /static/api/program
+        backend:
+          serviceName: operation-api
+          servicePort: 80   
+      - path: /static/api/programquestion
+        backend:
+          serviceName: operation-api
+          servicePort: 80 
+      - path: /static/api/programsquestions
+        backend:
+          serviceName: operation-api
+          servicePort: 80     
+      - path: /static/api/programsbinnaclequestions
+        backend:
+          serviceName: operation-api
+          servicePort: 80
+      - path: /static/api/programcreator
+        backend:
+          serviceName: operation-api
+          servicePort: 80         
+
+      - path: /static/client
+        backend:
+          serviceName: client-api
+          servicePort: 80 
+      - path: /static/client/swagger
+        backend:
+          serviceName: client-api
+          servicePort: 80  
+      - path: /static/api/usersworkcenters
+        backend:
+          serviceName: client-api
+          servicePort: 80
+      - path: /static/api/usersbinnacles
+        backend:
+          serviceName: client-api
+          servicePort: 80
+      - path: /static/api/usersbinnacles/binnaclequestionsinfo
+        backend:
+          serviceName: client-api
+          servicePort: 80        
+      - path: /static/api/usersprocedures
+        backend:
+          serviceName: client-api
+          servicePort: 80  
+      - path: /static/api/usersprograms
+        backend:
+          serviceName: client-api
+          servicePort: 80      
+      - path: /static/api/usersdocuments
+        backend:
+          serviceName: client-api
+          servicePort: 80 
+      - path: /static/api/alert
+        backend:
+          serviceName: client-api
+          servicePort: 80         
+      - path: /static/api/relationsinusersworkcenters/GetZonesInUsersWorkCenters
+        backend:
+          serviceName: client-api
+          servicePort: 80
+      - path: /static/api/relationsinusersworkcenters/GetEquipmentsInUsersWorkCenters
+        backend:
+          serviceName: client-api
+          servicePort: 80         

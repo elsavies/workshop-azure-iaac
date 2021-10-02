@@ -1,0 +1,10 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: nginx-config
+  namespace: dev-biitacora
+data:
+  proxy-connect-timeout: "600s"
+  proxy-read-timeout: "30s"
+  client-max-body-size: "1000m"
+  http2: "false"

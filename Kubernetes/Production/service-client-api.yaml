@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: client-api
+  namespace: dev-biitacora
+spec:     
+  ports:    
+  - name: http
+    protocol: TCP
+    port: 80
+    targetPort: 80
+  - name: https
+    protocol: TCP
+    port: 443
+    targetPort: 443
+  selector:
+    app: client
+    service: api
+    color: blue

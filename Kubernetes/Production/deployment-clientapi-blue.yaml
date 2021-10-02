@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+    name: client-api-blue
+    namespace: biitacora
+spec:
+    replicas: 3
+    strategy:
+        rollingUpdate:
+            maxSurge: 1
+            maxUnavailable: 1
+    minReadySeconds: 5 
+    selector:
+        matchLabels:    
+            app: client 
+            service: api
+            color: blue
+    template:
+        metadata:
+            labels:
+                app: client
+                service: api
+                color: blue
+        spec:
+            containers:
+            - image: acrbiitacorascus.azurecr.io/clientapi:latest
+              name: client-api
+              imagePullPolicy: Always
+              ports:
+              - containerPort: 80
+                protocol: TCP
+              - containerPort: 443
+                protocol: TCP                 

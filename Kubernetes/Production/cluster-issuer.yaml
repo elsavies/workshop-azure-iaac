@@ -1,0 +1,14 @@
+apiVersion: cert-manager.io/v1alpha2
+kind: ClusterIssuer
+metadata:
+  name: pro-letsencrypt 
+spec:
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    email: elsavies@normasmexico.com
+    privateKeySecretRef:
+      name: pro-letsencrypt
+    solvers:
+    - http01:
+        ingress:
+          class: nginx
